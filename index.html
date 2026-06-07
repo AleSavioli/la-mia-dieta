@@ -337,6 +337,75 @@ input{font-family:'Outfit',sans-serif;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
+/* ── TRACKER ── */
+.blue{--clr:#60a5fa;}
+.tracker-hero{background:linear-gradient(160deg,#0a1218 0%,#101820 60%,#1a2430 100%);padding:48px 20px 28px;border-bottom:1px solid rgba(96,165,250,.15);position:relative;overflow:hidden;}
+.tracker-hero::before{content:'';position:absolute;top:-60px;right:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.07) 0%,transparent 70%);pointer-events:none;}
+.blue-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3);color:#60a5fa;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;}
+.blue-dot{width:6px;height:6px;border-radius:50%;background:#60a5fa;animation:pulse 2s infinite;}
+
+.goal-section{margin:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;}
+.goal-track{height:10px;background:var(--card2);border-radius:5px;overflow:hidden;margin:10px 0 6px;}
+.goal-fill{height:100%;background:linear-gradient(90deg,var(--green-dim),var(--green));border-radius:5px;transition:width .6s ease;}
+.goal-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text-faint);}
+.gstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;}
+.gstat{background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:10px;text-align:center;}
+.gstat-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold);}
+.gstat-lbl{font-size:10px;color:var(--text-faint);margin-top:2px;}
+
+.tsection{margin:0 16px 16px;}
+.tsection-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;padding-top:4px;}
+
+.pred-card{background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid rgba(251,191,36,.2);border-radius:16px;padding:16px;margin-bottom:4px;}
+.pred-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.pred-big{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.pred-desc{font-size:12px;color:var(--text-dim);line-height:1.55;}
+.pred-note{font-size:10px;color:var(--text-faint);margin-top:8px;font-style:italic;}
+
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;overflow:hidden;}
+.chart-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.chart-ttl{font-weight:600;font-size:14px;}
+.chart-leg{display:flex;gap:10px;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text-dim);}
+.leg-dot{width:7px;height:7px;border-radius:50%;}
+
+.ttabs{display:flex;background:var(--card2);border-radius:12px;padding:3px;margin-bottom:14px;}
+.ttab{flex:1;padding:8px;border-radius:9px;font-size:12px;font-weight:600;background:none;color:var(--text-faint);transition:all .2s;}
+.ttab.active{background:var(--card3);color:var(--green);}
+
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fgroup{display:flex;flex-direction:column;gap:4px;}
+.fgroup.full{grid-column:1/-1;}
+.flabel{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint);}
+.finput{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-weight:500;-webkit-appearance:none;width:100%;}
+.finput:focus{outline:none;border-color:rgba(74,222,128,.4);}
+.finput::placeholder{color:var(--text-faint);}
+.funit{font-size:10px;color:var(--text-faint);margin-top:1px;}
+.btn-primary{width:100%;margin-top:14px;background:var(--green);color:var(--bg);font-weight:700;font-size:14px;padding:13px;border-radius:10px;transition:all .15s;}
+.btn-primary:active{transform:scale(.97);}
+
+.hlist{display:flex;flex-direction:column;gap:8px;}
+.hitem{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;}
+.hdate{font-size:11px;color:var(--text-faint);}
+.hweight{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--text);}
+.hdelta{font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px;}
+.dd{background:rgba(74,222,128,.12);color:var(--green);}
+.du{background:rgba(248,113,113,.12);color:var(--red);}
+.ds{background:rgba(74,222,128,.06);color:var(--text-faint);}
+.dchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.dchip{font-size:10px;background:var(--card2);border:1px solid var(--border2);color:var(--text-dim);padding:3px 8px;border-radius:6px;}
+.btn-del{background:none;color:var(--text-faint);font-size:16px;padding:2px;flex-shrink:0;}
+
+.act-sum{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
+.astat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;}
+.astat-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:#60a5fa;}
+.astat-lbl{font-size:10px;color:var(--text-faint);margin-top:2px;}
+
+.tempty{text-align:center;padding:28px 20px;color:var(--text-faint);}
+.tempty-icon{font-size:32px;margin-bottom:8px;}
+.tempty-text{font-size:13px;line-height:1.6;}
+
 /* ── UTILS ── */
 .mt8{margin-top:8px;}
 .mt16{margin-top:16px;}
@@ -591,13 +660,243 @@ input{font-family:'Outfit',sans-serif;}
   </button>
   <button class="nav-tab" data-page="fasi" onclick="switchPage('fasi',this)">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-    Le Fasi
+    Fasi
+  </button>
+  <button class="nav-tab" data-page="tracker" onclick="switchPage('tracker',this)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    Progressi
+  </button>
+  <button class="nav-tab" data-page="tadd" onclick="switchPage('tadd',this)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    + Dati
   </button>
   <button class="nav-tab" data-page="tips" onclick="switchPage('tips',this)">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-    Consigli
+    Info
   </button>
 </nav>
+
+<!-- ══════════════════════════════════════════════════
+     TRACKER — PAGE PROGRESSI
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-tracker">
+  <div class="tracker-hero">
+    <div class="blue-badge"><span class="blue-dot"></span>Corpo &amp; Fitness</div>
+    <div class="header-title">I tuoi <span style="color:#60a5fa">progressi</span></div>
+    <div class="header-sub">Peso, bilancia Huawei e attività Fit 4 Pro</div>
+  </div>
+
+  <!-- BARRA OBIETTIVO -->
+  <div class="goal-section">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);">Obiettivo peso</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:3px;">Partenza <strong style="color:var(--text)">94,4 kg</strong> → Target <strong style="color:var(--green)">80 kg</strong></div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--green);line-height:1;" id="t-cur-w">94,4</div>
+        <div style="font-size:11px;color:var(--text-faint);">kg attuali</div>
+      </div>
+    </div>
+    <div class="goal-track"><div class="goal-fill" id="t-fill" style="width:0%"></div></div>
+    <div class="goal-labels"><span>🎯 80 kg</span><strong style="color:var(--green-pale)" id="t-pct">0%</strong><span>94,4 kg</span></div>
+    <div class="gstats">
+      <div class="gstat"><div class="gstat-val" id="t-lost">0</div><div class="gstat-lbl">kg persi</div></div>
+      <div class="gstat"><div class="gstat-val" id="t-rem">14,4</div><div class="gstat-lbl">kg al target</div></div>
+      <div class="gstat"><div class="gstat-val" id="t-weeks">—</div><div class="gstat-lbl">sett. stimate</div></div>
+    </div>
+  </div>
+
+  <!-- PROIEZIONE -->
+  <div class="tsection">
+    <div class="tsection-title">🎯 Proiezione raggiungimento</div>
+    <div class="pred-card">
+      <div class="pred-label">📅 Data stimata obiettivo</div>
+      <div class="pred-big" id="t-pred-date">Inserisci 2+ misurazioni</div>
+      <div class="pred-desc" id="t-pred-desc">La stima apparirà dopo aver inserito i dati di almeno 2 settimane diverse.</div>
+      <div class="pred-note">⚠️ Proiezione basata sul tuo ritmo reale — consulta sempre il medico</div>
+    </div>
+  </div>
+
+  <!-- GRAFICO PESO -->
+  <div class="tsection">
+    <div class="tsection-title">📊 Grafico andamento peso</div>
+    <div class="chart-box">
+      <div class="chart-top">
+        <span class="chart-ttl">Settimane</span>
+        <div class="chart-leg">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Peso</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--gold);opacity:.6"></div>Obiettivo</div>
+        </div>
+      </div>
+      <canvas id="wChart" height="180"></canvas>
+    </div>
+  </div>
+
+  <!-- QUESTA SETTIMANA ATTIVITÀ -->
+  <div class="tsection">
+    <div class="tsection-title">🏃 Attività questa settimana</div>
+    <div class="act-sum">
+      <div class="astat"><div class="astat-val" id="t-wkm">0</div><div class="astat-lbl">km</div></div>
+      <div class="astat"><div class="astat-val" id="t-wcal">0</div><div class="astat-lbl">kcal bruciate</div></div>
+      <div class="astat"><div class="astat-val" id="t-wmin">0</div><div class="astat-lbl">minuti</div></div>
+    </div>
+  </div>
+
+  <!-- STORICO MISURAZIONI -->
+  <div class="tsection">
+    <div class="tsection-title">📋 Storico misurazioni</div>
+    <div class="hlist" id="t-body-list">
+      <div class="tempty"><div class="tempty-icon">⚖️</div><div class="tempty-text">Nessuna misurazione ancora.<br>Tocca <strong>+ Aggiungi</strong> qui sotto!</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     TRACKER — PAGE AGGIUNGI
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-tadd">
+  <div class="tracker-hero">
+    <div class="blue-badge"><span class="blue-dot"></span>Nuova voce</div>
+    <div class="header-title">Aggiungi <span style="color:#60a5fa">dati</span></div>
+    <div class="header-sub">Inserisci i valori dalla bilancia o dall'attività</div>
+  </div>
+
+  <div style="margin:16px;">
+    <div class="ttabs">
+      <button class="ttab active" onclick="switchTTab('body',this)">⚖️ Bilancia</button>
+      <button class="ttab" onclick="switchTTab('act',this)">🏃 Attività</button>
+    </div>
+
+    <!-- BILANCIA FORM -->
+    <div id="ttab-body">
+      <div class="form-card">
+        <div class="fgrid">
+          <div class="fgroup full">
+            <div class="flabel">Data misurazione</div>
+            <input type="date" class="finput" id="f-date">
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Peso ⭐</div>
+            <input type="number" class="finput" id="f-weight" placeholder="es. 93.2" step="0.1" min="50" max="200">
+            <div class="funit">kg — obbligatorio</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">BMI</div>
+            <input type="number" class="finput" id="f-bmi" placeholder="es. 28.7" step="0.1">
+            <div class="funit">calcolato dalla bilancia</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Grasso corporeo</div>
+            <input type="number" class="finput" id="f-fat" placeholder="es. 24.5" step="0.1">
+            <div class="funit">%</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Massa muscolare</div>
+            <input type="number" class="finput" id="f-muscle" placeholder="es. 68.2" step="0.1">
+            <div class="funit">kg</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Grasso viscerale</div>
+            <input type="number" class="finput" id="f-visceral" placeholder="es. 12" step="1" min="1" max="20">
+            <div class="funit">livello 1–20</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Metabolismo basale</div>
+            <input type="number" class="finput" id="f-metab" placeholder="es. 1850" step="1">
+            <div class="funit">kcal/giorno</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Bilancio idrico</div>
+            <input type="number" class="finput" id="f-water" placeholder="es. 58.3" step="0.1">
+            <div class="funit">%</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Densità ossea</div>
+            <input type="number" class="finput" id="f-bone" placeholder="es. 3.2" step="0.1">
+            <div class="funit">kg</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Proteine</div>
+            <input type="number" class="finput" id="f-prot" placeholder="es. 18.2" step="0.1">
+            <div class="funit">%</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Massa magra</div>
+            <input type="number" class="finput" id="f-lean" placeholder="es. 71.4" step="0.1">
+            <div class="funit">kg</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="saveBodyEntry()">💾 Salva misurazione</button>
+      </div>
+    </div>
+
+    <!-- ATTIVITÀ FORM -->
+    <div id="ttab-act" style="display:none;">
+      <div class="form-card">
+        <div class="fgrid">
+          <div class="fgroup full">
+            <div class="flabel">Data attività</div>
+            <input type="date" class="finput" id="fa-date">
+          </div>
+          <div class="fgroup full">
+            <div class="flabel">Tipo attività</div>
+            <select class="finput" id="fa-type" style="appearance:none;">
+              <option value="camminata">🚶 Camminata</option>
+              <option value="corsa">🏃 Corsa</option>
+              <option value="bici">🚴 Bici / Cyclette</option>
+              <option value="nuoto">🏊 Nuoto</option>
+              <option value="yoga">🧘 Yoga / Stretching</option>
+              <option value="palestra">💪 Palestra / Pesi</option>
+              <option value="altro">⚡ Altro</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Distanza</div>
+            <input type="number" class="finput" id="fa-dist" placeholder="es. 4.2" step="0.1" min="0">
+            <div class="funit">km</div>
+          </div>
+          <div class="fgroup">
+            <div class="flabel">Durata ⭐</div>
+            <input type="number" class="finput" id="fa-dur" placeholder="es. 45" step="1" min="1">
+            <div class="funit">minuti — obbligatorio</div>
+          </div>
+          <div class="fgroup full">
+            <div class="flabel">Calorie bruciate (Fit 4 Pro)</div>
+            <input type="number" class="finput" id="fa-kcal" placeholder="es. 320" step="1" min="0">
+            <div class="funit">kcal dal Huawei Fit 4 Pro</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="saveActEntry()">💾 Salva attività</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     TRACKER — PAGE ATTIVITÀ STORICO
+══════════════════════════════════════════════════ -->
+<div class="page" id="page-tact">
+  <div class="tracker-hero">
+    <div class="blue-badge"><span class="blue-dot"></span>Fitness</div>
+    <div class="header-title">Le tue <span style="color:#60a5fa">attività</span></div>
+    <div class="header-sub">Storico allenamenti dal Huawei Fit 4 Pro</div>
+  </div>
+
+  <div style="margin:16px 16px 0;">
+    <div class="tsection-title">📊 Totali questa settimana</div>
+    <div class="act-sum">
+      <div class="astat"><div class="astat-val" id="ta-wkm">0</div><div class="astat-lbl">km totali</div></div>
+      <div class="astat"><div class="astat-val" id="ta-wcal">0</div><div class="astat-lbl">kcal bruciate</div></div>
+      <div class="astat"><div class="astat-val" id="ta-wmin">0</div><div class="astat-lbl">minuti attivi</div></div>
+    </div>
+
+    <div class="tsection-title" style="margin-top:8px;">📋 Storico completo</div>
+    <div class="hlist" id="t-act-list">
+      <div class="tempty"><div class="tempty-icon">🏃</div><div class="tempty-text">Nessuna attività ancora.<br>Tocca <strong>+ Aggiungi</strong> e inserisci il tuo allenamento!</div></div>
+    </div>
+  </div>
+</div>
 
 <script>
 // ─── DATA ──────────────────────────────────────────────────────────────────
@@ -1012,7 +1311,349 @@ function updateDayCard(dayIdx) {
   if(!allDone && existing) existing.remove();
 }
 
-// ─── PWA INSTALL ───────────────────────────────────────────────────────────
+// ─── TRACKER ───────────────────────────────────────────────────────────────
+const TSK = 'dieta-tracker-v2';
+function tLoad(){ try{ return JSON.parse(localStorage.getItem(TSK)||'{}'); }catch{ return {}; } }
+function tSave(d){ try{ localStorage.setItem(TSK, JSON.stringify(d)); }catch{} }
+
+let tData = tLoad();
+if(!tData.body)     tData.body     = [];
+if(!tData.activity) tData.activity = [];
+
+const T_START  = 94.4;
+const T_TARGET = 80.0;
+
+// Sub-page navigation for tracker pages
+function switchPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  // map tracker sub-pages
+  const pageId = ['tracker','tadd','tact'].includes(name) ? 'page-'+name : 'page-'+name;
+  const el = document.getElementById(pageId);
+  if(el) el.classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+  if(name === 'tracker') renderTracker();
+  if(name === 'tact')    renderActPage();
+}
+
+function switchTTab(name, btn){
+  document.querySelectorAll('.ttab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('ttab-body').style.display = name==='body' ? 'block' : 'none';
+  document.getElementById('ttab-act').style.display  = name==='act'  ? 'block' : 'none';
+}
+
+// Set today's dates on tracker forms
+(function setTrackerDates(){
+  const today = new Date().toISOString().split('T')[0];
+  setTimeout(()=>{
+    const fd = document.getElementById('f-date');
+    const fa = document.getElementById('fa-date');
+    if(fd && !fd.value) fd.value = today;
+    if(fa && !fa.value) fa.value = today;
+  }, 100);
+})();
+
+// ── SAVE BODY ───────────────────────────────────────────────────────────────
+function saveBodyEntry(){
+  const w = parseFloat(document.getElementById('f-weight').value);
+  if(!w || w < 40 || w > 250){ showTToast('⚠️ Inserisci un peso valido'); return; }
+  const entry = {
+    date:     document.getElementById('f-date').value || new Date().toISOString().split('T')[0],
+    weight:   w,
+    bmi:      parseFloat(document.getElementById('f-bmi').value)      || null,
+    fat:      parseFloat(document.getElementById('f-fat').value)      || null,
+    muscle:   parseFloat(document.getElementById('f-muscle').value)   || null,
+    visceral: parseFloat(document.getElementById('f-visceral').value) || null,
+    metab:    parseFloat(document.getElementById('f-metab').value)    || null,
+    water:    parseFloat(document.getElementById('f-water').value)    || null,
+    bone:     parseFloat(document.getElementById('f-bone').value)     || null,
+    prot:     parseFloat(document.getElementById('f-prot').value)     || null,
+    lean:     parseFloat(document.getElementById('f-lean').value)     || null,
+    ts:       Date.now()
+  };
+  tData.body.push(entry);
+  tData.body.sort((a,b) => new Date(a.date) - new Date(b.date));
+  tSave(tData);
+  ['f-weight','f-bmi','f-fat','f-muscle','f-visceral','f-metab','f-water','f-bone','f-prot','f-lean']
+    .forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  showTToast('✅ Misurazione salvata!');
+}
+
+// ── SAVE ACTIVITY ────────────────────────────────────────────────────────────
+function saveActEntry(){
+  const dur = parseFloat(document.getElementById('fa-dur').value);
+  if(!dur || dur < 1){ showTToast('⚠️ Inserisci almeno la durata'); return; }
+  const entry = {
+    date:     document.getElementById('fa-date').value || new Date().toISOString().split('T')[0],
+    type:     document.getElementById('fa-type').value,
+    distance: parseFloat(document.getElementById('fa-dist').value)  || 0,
+    duration: dur,
+    calories: parseFloat(document.getElementById('fa-kcal').value)  || 0,
+    ts:       Date.now()
+  };
+  tData.activity.push(entry);
+  tData.activity.sort((a,b) => new Date(a.date) - new Date(b.date));
+  tSave(tData);
+  ['fa-dist','fa-dur','fa-kcal'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  showTToast('✅ Attività salvata!');
+}
+
+// ── DELETE ────────────────────────────────────────────────────────────────────
+function deleteBodyEntry(ts){
+  if(!confirm('Eliminare questa misurazione?')) return;
+  tData.body = tData.body.filter(e => e.ts !== ts);
+  tSave(tData); renderTracker();
+}
+function deleteActEntry(ts){
+  if(!confirm('Eliminare questa attività?')) return;
+  tData.activity = tData.activity.filter(e => e.ts !== ts);
+  tSave(tData); renderActPage();
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function showTToast(msg){
+  let t = document.getElementById('ttoast');
+  if(!t){
+    t = document.createElement('div'); t.id='ttoast';
+    t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a2d20;border:1px solid rgba(74,222,128,.4);color:#86efac;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;transition:opacity .3s;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg; t.style.opacity = '1';
+  setTimeout(() => t.style.opacity = '0', 2200);
+}
+
+// ── FORMAT HELPERS ────────────────────────────────────────────────────────────
+function fDate(d){ return new Date(d+'T12:00:00').toLocaleDateString('it-IT',{day:'2-digit',month:'short',year:'numeric'}); }
+function fDate2(d){ return new Date(d+'T12:00:00').toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'}); }
+function actIco(t){ return {camminata:'🚶',corsa:'🏃',bici:'🚴',nuoto:'🏊',yoga:'🧘',palestra:'💪',altro:'⚡'}[t]||'⚡'; }
+function actLbl(t){ return {camminata:'Camminata',corsa:'Corsa',bici:'Bici/Cyclette',nuoto:'Nuoto',yoga:'Yoga/Stretching',palestra:'Palestra',altro:'Altro'}[t]||t; }
+
+// ── WEEK ACTIVITY TOTALS ──────────────────────────────────────────────────────
+function weekActTotals(){
+  const now = new Date();
+  const wStart = new Date(now); wStart.setDate(now.getDate()-now.getDay()+1); wStart.setHours(0,0,0,0);
+  const thisWeek = tData.activity.filter(e => new Date(e.date+'T12:00:00') >= wStart);
+  return {
+    km:   thisWeek.reduce((a,e) => a+(e.distance||0), 0),
+    kcal: thisWeek.reduce((a,e) => a+(e.calories||0), 0),
+    min:  thisWeek.reduce((a,e) => a+(e.duration||0), 0),
+  };
+}
+
+// ── RENDER TRACKER PAGE ───────────────────────────────────────────────────────
+function renderTracker(){
+  const entries = tData.body;
+  const latest  = entries.length ? entries[entries.length-1] : null;
+  const curW    = latest ? latest.weight : T_START;
+  const lost    = +(T_START - curW).toFixed(1);
+  const rem     = +(curW - T_TARGET).toFixed(1);
+  const totalLose = T_START - T_TARGET; // 14.4
+  const pct     = Math.max(0, Math.min(100, (lost/totalLose)*100));
+
+  // header stats
+  document.getElementById('t-cur-w').textContent  = curW.toFixed(1).replace('.',',');
+  document.getElementById('t-fill').style.width   = pct+'%';
+  document.getElementById('t-pct').textContent    = Math.round(pct)+'%';
+  document.getElementById('t-lost').textContent   = (lost>0?'−':'')+Math.abs(lost);
+  document.getElementById('t-rem').textContent    = rem > 0 ? rem.toFixed(1) : '🎯';
+
+  // weeks estimate & prediction
+  let weeksEl = '—';
+  if(entries.length >= 2){
+    const first = entries[0], last = entries[entries.length-1];
+    const days  = Math.max(1,(new Date(last.date+'T12:00:00')-new Date(first.date+'T12:00:00'))/(864e5));
+    const wkLost = first.weight - last.weight;
+    if(wkLost > 0){
+      const rateWk  = (wkLost/days)*7;
+      const wksNeed = rem/rateWk;
+      weeksEl = wksNeed > 0 ? Math.round(wksNeed).toString() : '🎯';
+      const targetD = new Date(); targetD.setDate(targetD.getDate()+Math.round(wksNeed*7));
+      document.getElementById('t-pred-date').textContent = fDate2(targetD.toISOString().split('T')[0]);
+      document.getElementById('t-pred-desc').textContent =
+        `Al tuo ritmo di ${rateWk.toFixed(2).replace('.',',')} kg/settimana, raggiungeresti 80 kg in circa ${Math.round(wksNeed)} settimane. Continua così!`;
+    } else {
+      document.getElementById('t-pred-date').textContent = 'Mantieni la rotta!';
+      document.getElementById('t-pred-desc').textContent = 'Aggiungi più misurazioni per vedere la proiezione precisa.';
+    }
+  } else {
+    document.getElementById('t-pred-date').textContent = 'Inserisci 2+ misurazioni';
+    document.getElementById('t-pred-desc').textContent = 'La stima apparirà dopo almeno 2 settimane di dati.';
+  }
+  document.getElementById('t-weeks').textContent = weeksEl;
+
+  // weekly activity summary
+  const wa = weekActTotals();
+  document.getElementById('t-wkm').textContent  = wa.km.toFixed(1).replace('.',',');
+  document.getElementById('t-wcal').textContent = Math.round(wa.kcal);
+  document.getElementById('t-wmin').textContent = Math.round(wa.min);
+
+  // draw chart
+  drawWChart(entries);
+
+  // body history
+  const bl = document.getElementById('t-body-list');
+  if(!entries.length){
+    bl.innerHTML='<div class="tempty"><div class="tempty-icon">⚖️</div><div class="tempty-text">Nessuna misurazione ancora.<br>Tocca <strong>+ Dati</strong> qui sotto!</div></div>';
+    return;
+  }
+  bl.innerHTML = [...entries].reverse().map((e,i,arr)=>{
+    const prev = arr[i+1];
+    let dHtml = '';
+    if(prev){
+      const d = +(e.weight - prev.weight).toFixed(1);
+      if(d<0)      dHtml=`<span class="hdelta dd">▼ ${Math.abs(d)} kg</span>`;
+      else if(d>0) dHtml=`<span class="hdelta du">▲ ${d} kg</span>`;
+      else         dHtml=`<span class="hdelta ds">= stabile</span>`;
+    }
+    const chips = [
+      e.bmi      ? `BMI ${e.bmi}`              : null,
+      e.fat      ? `Grasso ${e.fat}%`          : null,
+      e.muscle   ? `Muscoli ${e.muscle} kg`    : null,
+      e.visceral ? `Viscerale lv.${e.visceral}`: null,
+      e.water    ? `Acqua ${e.water}%`         : null,
+      e.metab    ? `Metab. ${e.metab} kcal`    : null,
+      e.prot     ? `Prot. ${e.prot}%`          : null,
+      e.lean     ? `Magra ${e.lean} kg`        : null,
+      e.bone     ? `Ossea ${e.bone} kg`        : null,
+    ].filter(Boolean);
+    return `<div class="hitem">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div class="hdate">${fDate(e.date)}</div>
+          <div class="hweight">${e.weight.toFixed(1)} kg</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          ${dHtml}
+          <button class="btn-del" onclick="deleteBodyEntry(${e.ts})">🗑</button>
+        </div>
+      </div>
+      ${chips.length ? `<div class="dchips">${chips.map(c=>`<span class="dchip">${c}</span>`).join('')}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER ACTIVITY PAGE ──────────────────────────────────────────────────────
+function renderActPage(){
+  const wa = weekActTotals();
+  document.getElementById('ta-wkm').textContent  = wa.km.toFixed(1).replace('.',',');
+  document.getElementById('ta-wcal').textContent = Math.round(wa.kcal);
+  document.getElementById('ta-wmin').textContent = Math.round(wa.min);
+
+  const al = document.getElementById('t-act-list');
+  if(!tData.activity.length){
+    al.innerHTML='<div class="tempty"><div class="tempty-icon">🏃</div><div class="tempty-text">Nessuna attività ancora.<br>Tocca <strong>+ Dati</strong> e aggiungi il tuo allenamento!</div></div>';
+    return;
+  }
+  al.innerHTML = [...tData.activity].reverse().map(e=>`
+    <div class="hitem" style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div>
+        <div class="hdate">${fDate(e.date)}</div>
+        <div style="font-weight:600;font-size:14px;margin:3px 0;">${actIco(e.type)} ${actLbl(e.type)}</div>
+        <div class="dchips">
+          ${e.distance ? `<span class="dchip">📍 ${e.distance} km</span>` : ''}
+          <span class="dchip">⏱ ${e.duration} min</span>
+          ${e.calories ? `<span class="dchip">🔥 ${e.calories} kcal</span>` : ''}
+        </div>
+      </div>
+      <button class="btn-del" onclick="deleteActEntry(${e.ts})">🗑</button>
+    </div>`).join('');
+}
+
+// ── CANVAS CHART ─────────────────────────────────────────────────────────────
+function drawWChart(entries){
+  const canvas = document.getElementById('wChart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W   = (canvas.parentElement.offsetWidth || 300) - 32;
+  const H   = 180;
+  canvas.width  = W*dpr; canvas.height = H*dpr;
+  canvas.style.width = W+'px'; canvas.style.height = H+'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0,0,W,H);
+
+  const PAD = {top:16, right:16, bottom:32, left:46};
+  const cW  = W - PAD.left - PAD.right;
+  const cH  = H - PAD.top  - PAD.bottom;
+
+  if(!entries.length){
+    ctx.fillStyle = 'rgba(74,222,128,0.3)';
+    ctx.font = '12px Outfit,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Aggiungi la prima misurazione per vedere il grafico', W/2, H/2);
+    return;
+  }
+
+  // Build points: include starting weight as point 0
+  const pts = [
+    {label:'Inizio', w: T_START},
+    ...entries.map(e => ({label: fDate(e.date).slice(0,6), w: e.weight}))
+  ];
+  const weights = pts.map(p=>p.w);
+  const minW = Math.min(...weights, T_TARGET) - 1;
+  const maxW = Math.max(...weights) + 1;
+  const range = maxW - minW || 1;
+
+  const xStep = pts.length > 1 ? cW/(pts.length-1) : cW;
+  const xP = i => PAD.left + i*xStep;
+  const yP = w => PAD.top + cH - ((w-minW)/range)*cH;
+
+  // Grid
+  ctx.strokeStyle = 'rgba(74,222,128,0.06)'; ctx.lineWidth = 1;
+  for(let i=0; i<=4; i++){
+    const y = PAD.top + (cH/4)*i;
+    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+cW,y); ctx.stroke();
+    const val = maxW - (range/4)*i;
+    ctx.fillStyle = 'rgba(134,239,172,0.45)';
+    ctx.font = '10px Outfit,sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(val.toFixed(1), PAD.left-5, y+4);
+  }
+
+  // Target line
+  const ty = yP(T_TARGET);
+  ctx.strokeStyle = 'rgba(251,191,36,0.45)'; ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(PAD.left,ty); ctx.lineTo(PAD.left+cW,ty); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(251,191,36,0.75)';
+  ctx.font = '10px Outfit,sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('🎯 80 kg', PAD.left+4, ty-4);
+
+  // Area fill
+  const grad = ctx.createLinearGradient(0,PAD.top,0,PAD.top+cH);
+  grad.addColorStop(0, 'rgba(74,222,128,0.18)');
+  grad.addColorStop(1, 'rgba(74,222,128,0.01)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.moveTo(xP(0), yP(pts[0].w));
+  pts.forEach((_,i) => ctx.lineTo(xP(i), yP(pts[i].w)));
+  ctx.lineTo(xP(pts.length-1), PAD.top+cH);
+  ctx.lineTo(xP(0), PAD.top+cH);
+  ctx.closePath(); ctx.fill();
+
+  // Line
+  ctx.strokeStyle = 'rgba(74,222,128,0.9)'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  pts.forEach((p,i) => i===0 ? ctx.moveTo(xP(i),yP(p.w)) : ctx.lineTo(xP(i),yP(p.w)));
+  ctx.stroke();
+
+  // Dots + x-labels
+  pts.forEach((p,i)=>{
+    const x=xP(i), y=yP(p.w);
+    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+    ctx.fillStyle='#4ade80'; ctx.fill();
+    ctx.strokeStyle='#0b1a12'; ctx.lineWidth=2; ctx.stroke();
+    if(i===0 || i===pts.length-1 || pts.length<=7){
+      ctx.fillStyle='rgba(134,239,172,0.7)';
+      ctx.font='9px Outfit,sans-serif'; ctx.textAlign='center';
+      ctx.fillText(p.label, x, H-PAD.bottom+14);
+    }
+  });
+}
+
+
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', e=>{
   e.preventDefault();
