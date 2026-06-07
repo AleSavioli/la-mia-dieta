@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0b1a12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="La Mia Dieta">
+<meta name="description" content="Piano alimentare personalizzato — Fase 1">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>La Mia Dieta 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b1a12;
+  --bg2: #101f16;
+  --card: #152219;
+  --card2: #1a2d20;
+  --card3: #1f3326;
+  --green: #4ade80;
+  --green-dim: #22c55e;
+  --green-pale: #86efac;
+  --gold: #fbbf24;
+  --gold-dim: #d97706;
+  --orange: #fb923c;
+  --red: #f87171;
+  --text: #e8f5ec;
+  --text-dim: #8fb89a;
+  --text-faint: #4d7a59;
+  --border: rgba(74,222,128,0.13);
+  --border2: rgba(74,222,128,0.07);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+button{font-family:'Outfit',sans-serif;cursor:pointer;border:none;outline:none;}
+input{font-family:'Outfit',sans-serif;}
+
+/* ── INSTALL BANNER ── */
+#install-banner{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;
+  background:linear-gradient(135deg,var(--card2),var(--card));
+  border-top:1px solid var(--border);
+  padding:14px 16px;
+  animation:slideUp .3s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.install-inner{display:flex;align-items:center;gap:12px;}
+.install-icon{font-size:28px;flex-shrink:0;}
+.install-text{flex-grow:1;}
+.install-title{font-weight:700;font-size:14px;color:var(--text);}
+.install-sub{font-size:11.5px;color:var(--text-dim);margin-top:2px;}
+.install-btn{background:var(--green);color:var(--bg);font-weight:700;font-size:13px;padding:9px 16px;border-radius:10px;white-space:nowrap;}
+.install-close{color:var(--text-faint);font-size:20px;padding:4px;background:none;flex-shrink:0;}
+
+/* ── NAV TABS ── */
+#app-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  display:flex;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.nav-tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:10px 4px 8px;gap:4px;
+  background:none;color:var(--text-faint);
+  font-size:10px;font-weight:600;letter-spacing:.5px;
+  transition:color .2s;
+}
+.nav-tab.active{color:var(--green);}
+.nav-tab svg{transition:transform .2s;}
+.nav-tab.active svg{transform:scale(1.1);}
+
+/* ── PAGES ── */
+.page{display:none;padding-bottom:80px;}
+.page.active{display:block;}
+
+/* ── HEADER ── */
+.page-header{
+  background:linear-gradient(160deg,#0a1710 0%,#112018 60%,var(--card2) 100%);
+  padding:48px 20px 28px;
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;top:-80px;right:-50px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(74,222,128,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.phase-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3);
+  color:var(--green);font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:5px 12px;border-radius:20px;margin-bottom:14px;
+}
+.phase-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,8vw,3rem);font-weight:900;line-height:1.1;margin-bottom:8px;}
+.header-title span{color:var(--green);}
+.header-sub{font-size:13px;color:var(--text-dim);line-height:1.6;max-width:340px;}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{margin-top:18px;}
+.progress-meta{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;color:var(--text-faint);}
+.progress-meta strong{color:var(--green);}
+.progress-track{height:7px;background:var(--card2);border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green-dim),var(--green));border-radius:4px;transition:width .5s ease;}
+
+/* ── TODAY QUICK CARD ── */
+.today-card{
+  margin:16px 16px 0;
+  background:var(--card);
+  border:1px solid rgba(74,222,128,.3);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 0 0 1px rgba(74,222,128,.08);
+}
+.today-label{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.today-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+.today-label-text{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);}
+.today-meals-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.today-meal-mini{
+  background:var(--card2);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:10px 12px;
+  cursor:pointer;transition:all .15s;
+}
+.today-meal-mini:active{transform:scale(.97);}
+.today-meal-mini.done{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);}
+.tmm-type{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px;}
+.tmm-title{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;}
+.tmm-check{font-size:14px;margin-top:4px;}
+
+/* ── SECTION TITLE ── */
+.section-title{
+  padding:20px 16px 10px;
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text-faint);
+}
+
+/* ── RULES STRIP ── */
+.rules-strip{
+  margin:0 16px 16px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+.rules-toggle{
+  width:100%;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:none;color:var(--text-dim);font-size:13px;font-weight:600;
+}
+.rules-body{display:none;border-top:1px solid var(--border2);}
+.rules-body.open{display:block;}
+.rule-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 14px;border-bottom:1px solid var(--border2);
+  font-size:12.5px;
+}
+.rule-item:last-child{border-bottom:none;}
+.rule-icon{font-size:17px;flex-shrink:0;margin-top:1px;}
+.rule-ok strong{color:var(--text);}
+.rule-no strong{color:var(--red);}
+.rule-desc{font-size:11px;color:var(--text-faint);margin-top:1px;}
+
+/* ── DAY CARDS ── */
+.days-list{padding:0 16px;}
+.day-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;overflow:hidden;
+  transition:border-color .2s;
+}
+.day-card.today-highlight{border-color:rgba(74,222,128,.4);box-shadow:0 0 0 1px rgba(74,222,128,.1);}
+.day-card.all-done{border-color:rgba(74,222,128,.25);}
+.day-header{
+  padding:14px 16px;display:flex;align-items:center;
+  cursor:pointer;user-select:none;gap:12px;
+}
+.day-num{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:var(--card2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;
+  color:var(--green-pale);transition:all .2s;
+}
+.today-highlight .day-num{background:var(--green);color:var(--bg);border-color:var(--green);}
+.all-done .day-num{background:rgba(74,222,128,.15);color:var(--green);}
+.day-info{flex-grow:1;}
+.day-name{font-weight:700;font-size:15px;color:var(--text);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.badge-today{background:var(--green);color:var(--bg);font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:8px;}
+.badge-done{background:rgba(74,222,128,.15);color:var(--green);font-size:9px;font-weight:700;padding:2px 8px;border-radius:8px;}
+.day-sub{font-size:11px;color:var(--text-faint);margin-top:2px;}
+.day-dots{display:flex;gap:4px;flex-shrink:0;}
+.meal-dot-sm{width:8px;height:8px;border-radius:4px;background:var(--card2);border:1px solid var(--border);transition:all .2s;}
+.meal-dot-sm.checked{background:var(--green);border-color:var(--green-dim);}
+.chevron{color:var(--text-faint);flex-shrink:0;transition:transform .25s;}
+.day-card.open .chevron{transform:rotate(180deg);}
+
+.day-body{display:none;padding:0 14px 16px;}
+.day-card.open .day-body{display:block;}
+
+/* ── MEAL CARDS ── */
+.meals-list{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+.meal-card{
+  background:var(--card2);border:1px solid var(--border2);
+  border-radius:12px;overflow:hidden;transition:all .2s;
+}
+.meal-card.done{background:rgba(74,222,128,.05);border-color:rgba(74,222,128,.2);opacity:.8;}
+.meal-head{
+  padding:9px 12px;display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border2);
+}
+.meal-emoji{font-size:18px;}
+.meal-type-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);flex-grow:1;}
+.meal-kcal{font-size:10px;color:var(--text-faint);background:rgba(74,222,128,.05);padding:2px 7px;border-radius:7px;}
+.meal-body-inner{padding:12px 12px 10px;}
+
+/* option dots */
+.opt-dots{display:flex;align-items:center;gap:5px;margin-bottom:8px;}
+.opt-dot{height:5px;border-radius:3px;background:var(--text-faint);transition:all .2s;}
+.opt-dot.active{background:var(--green);}
+.opt-count{font-size:10px;color:var(--text-faint);margin-left:4px;}
+
+.meal-opt-title{font-weight:600;font-size:13.5px;color:var(--text);margin-bottom:5px;}
+.meal-card.done .meal-opt-title{color:var(--green-pale);}
+.meal-opt-desc{font-size:12.5px;color:var(--text-dim);line-height:1.5;}
+.meal-opt-note{font-size:11px;color:var(--text-faint);font-style:italic;margin-top:5px;}
+
+.meal-actions{display:flex;gap:7px;margin-top:10px;}
+.btn-swap{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(74,222,128,.08);border:1px solid var(--border);
+  color:var(--green-pale);border-radius:8px;padding:8px 12px;
+  font-size:12px;font-weight:600;transition:all .15s;flex-shrink:0;
+}
+.btn-swap:active{background:rgba(74,222,128,.18);transform:scale(.96);}
+.btn-check{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:rgba(74,222,128,.05);border:1px solid var(--border);
+  color:var(--text-dim);border-radius:8px;padding:8px 12px;
+  font-size:12px;font-weight:600;transition:all .15s;flex-grow:1;
+}
+.btn-check.checked{background:rgba(74,222,128,.15);border-color:var(--green);color:var(--green);}
+.btn-check:active{transform:scale(.96);}
+
+.day-tip{
+  margin-top:12px;padding:10px 12px;
+  background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);
+  border-radius:10px;font-size:12px;color:#fde68a;
+  display:flex;gap:9px;align-items:flex-start;line-height:1.5;
+}
+.water-remind{
+  margin-top:8px;padding:8px 12px;
+  background:rgba(74,222,128,.03);border:1px solid var(--border2);
+  border-radius:10px;font-size:12px;color:var(--text-dim);
+  display:flex;gap:8px;align-items:center;
+}
+
+/* ── PHASE 2 PAGE ── */
+.phase-section{padding:0 16px 20px;}
+.phase-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;overflow:hidden;
+}
+.phase-card-header{
+  padding:14px 16px;display:flex;align-items:center;gap:12px;
+  cursor:pointer;
+}
+.phase-num{
+  width:36px;height:36px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;
+}
+.phase-num.p1{background:rgba(74,222,128,.15);color:var(--green);}
+.phase-num.p2{background:rgba(251,191,36,.12);color:var(--gold);}
+.phase-num.p3{background:rgba(251,146,60,.12);color:var(--orange);}
+.phase-card-title{font-weight:700;font-size:14px;flex-grow:1;}
+.phase-card-sub{font-size:11px;color:var(--text-faint);margin-top:2px;}
+.phase-card-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border2);}
+.phase-card.open .phase-card-body{display:block;}
+.phase-item{
+  display:flex;gap:10px;padding:10px 0;
+  border-bottom:1px solid var(--border2);font-size:13px;line-height:1.5;
+}
+.phase-item:last-child{border-bottom:none;}
+.phase-bullet{width:6px;height:6px;border-radius:50%;background:var(--green-dim);margin-top:7px;flex-shrink:0;}
+
+/* ── TIPS PAGE ── */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;}
+.tip-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;
+}
+.tip-card.gold{border-top:3px solid var(--gold);}
+.tip-card.green{border-top:3px solid var(--green);}
+.tip-card.orange{border-top:3px solid var(--orange);}
+.tip-card.red{border-top:3px solid var(--red);}
+.tip-icon{font-size:24px;margin-bottom:8px;}
+.tip-title{font-weight:700;font-size:13px;color:var(--text);margin-bottom:5px;}
+.tip-text{font-size:11.5px;color:var(--text-dim);line-height:1.5;}
+
+.avoid-list{padding:0 16px;display:flex;flex-wrap:wrap;gap:8px;}
+.avoid-chip{
+  display:flex;align-items:center;gap:6px;
+  background:var(--card);border:1px solid rgba(248,113,113,.25);
+  color:var(--red);padding:7px 12px;border-radius:20px;font-size:12px;font-weight:500;
+}
+
+/* ── ACTIVITY PAGE ── */
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;}
+.activity-card{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;
+  position:relative;overflow:hidden;
+}
+.activity-card::before{
+  content:'';position:absolute;top:-15px;right:-15px;
+  width:70px;height:70px;border-radius:50%;
+  background:rgba(74,222,128,.04);pointer-events:none;
+}
+.activity-icon{font-size:26px;margin-bottom:8px;display:block;}
+.activity-name{font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px;}
+.activity-desc{font-size:11px;color:var(--text-dim);line-height:1.45;margin-bottom:8px;}
+.activity-freq{
+  display:inline-block;background:rgba(74,222,128,.12);
+  color:var(--green-pale);font-size:10px;font-weight:700;
+  padding:3px 9px;border-radius:8px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+/* ── UTILS ── */
+.mt8{margin-top:8px;}
+.mt16{margin-top:16px;}
+</style>
+</head>
+<body>
+
+<!-- INSTALL BANNER -->
+<div id="install-banner">
+  <div class="install-inner">
+    <div class="install-icon">🌿</div>
+    <div class="install-text">
+      <div class="install-title">Installa l'app sul telefono</div>
+      <div class="install-sub">Accedi alla dieta sempre, anche offline</div>
+    </div>
+    <button class="install-btn" id="install-btn">Installa</button>
+    <button class="install-close" id="install-close">✕</button>
+  </div>
+</div>
+
+<!-- PAGES -->
+
+<!-- ── HOME ── -->
+<div class="page active" id="page-home">
+  <div class="page-header">
+    <div class="phase-badge"><span class="phase-dot"></span>Fase 1 Attiva</div>
+    <div class="header-title">La tua<br><span>dieta</span></div>
+    <div class="header-sub">Piano personalizzato · Pasto per pasto · Sempre con te</div>
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Pasti completati</span>
+        <strong id="progress-text">0 / 28</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- TODAY QUICK VIEW -->
+  <div class="today-card">
+    <div class="today-label"><div class="today-dot"></div><span class="today-label-text">Oggi — Giorno 1</span></div>
+    <div class="today-meals-grid" id="today-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <div class="section-title">📋 Regole Fase 1</div>
+  <div class="rules-strip">
+    <button class="rules-toggle" onclick="toggleRules(this)">
+      <span>Proteine + verdure · Zero carbo · 2L acqua</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="rules-body" id="rules-body">
+      <div class="rule-item rule-ok"><span class="rule-icon">✅</span><div><strong>Proteine libere</strong><div class="rule-desc">Carne, pesce, uova, affettati — a volontà</div></div></div>
+      <div class="rule-item rule-ok"><span class="rule-icon">🥗</span><div><strong>Verdure a volontà</strong><div class="rule-desc">Verdi e bianche preferite nelle prime 2 sett.</div></div></div>
+      <div class="rule-item rule-ok"><span class="rule-icon">💧</span><div><strong>2+ litri/giorno</strong><div class="rule-desc">Acqua, tisane, tè, caffè con dolcificante</div></div></div>
+      <div class="rule-item rule-no"><span class="rule-icon">🚫</span><div><strong style="color:var(--red)">No carboidrati</strong><div class="rule-desc">Pasta, pane, riso, patate, frutta</div></div></div>
+      <div class="rule-item rule-no"><span class="rule-icon">🚫</span><div><strong style="color:var(--red)">No latticini</strong><div class="rule-desc">Solo parmigiano come condimento è ok</div></div></div>
+      <div class="rule-item rule-no"><span class="rule-icon">⚠️</span><div><strong style="color:var(--red)">No fave — allergia</strong><div class="rule-desc">Verifica sempre gli ingredienti!</div></div></div>
+    </div>
+  </div>
+
+  <div class="section-title">📅 Settimana 1 — Giorno per giorno</div>
+  <div class="days-list" id="days-list"><!-- filled by JS --></div>
+</div>
+
+<!-- ── FASI ── -->
+<div class="page" id="page-fasi">
+  <div class="page-header">
+    <div class="phase-badge"><span class="phase-dot"></span>Il percorso</div>
+    <div class="header-title">Le <span>3 fasi</span></div>
+    <div class="header-sub">Come evolve la dieta nel tempo</div>
+  </div>
+  <div class="section-title">Il tuo percorso completo</div>
+  <div class="phase-section">
+
+    <div class="phase-card open" id="pc1">
+      <div class="phase-card-header" onclick="togglePhaseCard('pc1')">
+        <div class="phase-num p1">1</div>
+        <div class="phase-card-info" style="flex-grow:1">
+          <div class="phase-card-title">Fase d'Attacco <span style="font-size:10px;color:var(--green);background:rgba(74,222,128,.12);padding:2px 8px;border-radius:8px;font-weight:700;margin-left:4px;">ATTIVA</span></div>
+          <div class="phase-card-sub">Giorni 1–14 · Solo proteine + verdure</div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="phase-card-body">
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Proteine a volontà</strong> — carne bianca, carne rossa (max 2×/sett.), pesce, uova (max 2×/sett.), affettati magri</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Verdure verdi e bianche</strong> preferite: cetrioli, finocchi, sedano, zucchine, spinaci, champignon, cicoria, broccoli, asparagi</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Zero carboidrati</strong> — niente pasta, pane, riso, patate, frutta</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Zero latticini</strong> — solo parmigiano come condimento (1 cucchiaio)</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Domenica:</strong> pasta di legumi (non fave!) con tonno è un "mezzo strappo" consentito</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>In caso di voglia di pasta:</strong> shirataki/konjac — zero carboidrati, saziano tantissimo</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Se mangi fuori:</strong> 80–100g pane di segale con bresaola, fesa, tonno, salmone o crudo + verdure</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div>🧂 <strong>Sale ridotto</strong> — usi invece limone, aceto di mele, erbe aromatiche, spezie</div></div>
+      </div>
+    </div>
+
+    <div class="phase-card" id="pc2">
+      <div class="phase-card-header" onclick="togglePhaseCard('pc2')">
+        <div class="phase-num p2">2</div>
+        <div style="flex-grow:1">
+          <div class="phase-card-title">Fase di Transizione</div>
+          <div class="phase-card-sub">Giorni 14–20 · Si aggiungono frutta e legumi</div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="phase-card-body">
+        <div class="phase-item"><div class="phase-bullet"></div><div>Tutto della Fase 1, più le novità qui sotto</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Spuntini con frutta:</strong> 200g mele/pere/kiwi/fragole, 1 banana + 20g frutta secca, 250g arancia, spremuta</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Frutta secca:</strong> 25g anacardi, mandorle o noci — ottimi per la pressione!</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>50g lupini</strong> (non fave — ok!) come spuntino</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>1× settimana:</strong> 150–180g mozzarella o scamorza o ricotta o 100g robiola/Philadelphia</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>2× settimana:</strong> 200g legumi freschi (escluse fave!) o 120g pasta di legumi solo con verdure</div></div>
+      </div>
+    </div>
+
+    <div class="phase-card" id="pc3">
+      <div class="phase-card-header" onclick="togglePhaseCard('pc3')">
+        <div class="phase-num p3">3</div>
+        <div style="flex-grow:1">
+          <div class="phase-card-title">Fase di Mantenimento</div>
+          <div class="phase-card-sub">Dal giorno 21 · Regime equilibrato</div>
+        </div>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="phase-card-body">
+        <div class="phase-item"><div class="phase-bullet"></div><div>Tutto della Fase 2, più le novità qui sotto</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>2× settimana a pranzo:</strong> 90g pasta/riso integrale o 200g patate + verdure + 100g proteine animali</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>2× settimana:</strong> insalata di riso/orzo/farro (60g) con tonno, feta o legumi</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>1× settimana:</strong> pizza (meglio con verdure o prosciutto, evita formaggi fusi)</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Colazione più ricca:</strong> yogurt greco + 4 biscotti d'avena, oppure pancake, oppure avena con frutta</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div><strong>Giorni "depurativi"</strong> (lunedì e giovedì consigliati): zero carbo, solo proteine + verdure, per compensare eventuali strappi</div></div>
+        <div class="phase-item"><div class="phase-bullet"></div><div>🍕 Domenica: 100g pasta di legumi con tonno/zucchine/limone/menta è sempre concessa</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CONSIGLI ── -->
+<div class="page" id="page-tips">
+  <div class="page-header">
+    <div class="phase-badge"><span class="phase-dot"></span>I tuoi alleati</div>
+    <div class="header-title">Consigli <span>chiave</span></div>
+    <div class="header-sub">Per ipertensione, allergia e buoni risultati</div>
+  </div>
+
+  <div class="section-title">💡 Consigli pratici</div>
+  <div class="tips-grid">
+    <div class="tip-card green">
+      <div class="tip-icon">🧂</div>
+      <div class="tip-title">Senza sale</div>
+      <div class="tip-text">Usa limone, aceto di mele, rosmarino, timo, aglio, curcuma e pepe. Stessa soddisfazione, pressione più bassa.</div>
+    </div>
+    <div class="tip-card gold">
+      <div class="tip-icon">💧</div>
+      <div class="tip-title">Idratazione</div>
+      <div class="tip-text">2 litri al giorno minimi. L'acqua oligominerale è la migliore per gli ipertesi. Tè verde e tisane contano!</div>
+    </div>
+    <div class="tip-card green">
+      <div class="tip-icon">🫐</div>
+      <div class="tip-title">Alleati pressione</div>
+      <div class="tip-text">Spinaci, broccoli, salmone, banana (dalla fase 2), cioccolato fondente >85%: abbassano attivamente la pressione.</div>
+    </div>
+    <div class="tip-card gold">
+      <div class="tip-icon">⏰</div>
+      <div class="tip-title">Orari regolari</div>
+      <div class="tip-text">3 pasti + 2 spuntini. Non saltare i pasti: stabilizza glicemia, metabolismo e i picchi di pressione.</div>
+    </div>
+    <div class="tip-card orange">
+      <div class="tip-icon">🏷️</div>
+      <div class="tip-title">Etichette!</div>
+      <div class="tip-text">La farina di fave si nasconde in molti prodotti da forno. Controlla sempre. Stessa cosa per il sodio.</div>
+    </div>
+    <div class="tip-card orange">
+      <div class="tip-icon">🍝</div>
+      <div class="tip-title">Voglia di pasta?</div>
+      <div class="tip-text">Shirataki/konjac: zero carboidrati, saziano tantissimo. Si trovano nei supermercati bio e online.</div>
+    </div>
+    <div class="tip-card red">
+      <div class="tip-icon">🍕</div>
+      <div class="tip-title">Se esci a cena</div>
+      <div class="tip-text">Secondi alla griglia, pesce al forno, insalate. Evita pane e dolci. Un'uscita non compromette nulla!</div>
+    </div>
+    <div class="tip-card red">
+      <div class="tip-icon">📆</div>
+      <div class="tip-title">Dopo uno strappo</div>
+      <div class="tip-text">Giorno depurativo (lun/gio): zero carbo, solo proteine + verdure. Recuperi in 24 ore!</div>
+    </div>
+  </div>
+
+  <div class="section-title mt16">🚫 Da evitare sempre</div>
+  <div class="avoid-list">
+    <div class="avoid-chip">✗ Fave (allergia!)</div>
+    <div class="avoid-chip">✗ Sale aggiunto</div>
+    <div class="avoid-chip">✗ Liquirizia</div>
+    <div class="avoid-chip">✗ Salmone affumicato >2×/sett.</div>
+    <div class="avoid-chip">✗ Alcol e superalcolici</div>
+    <div class="avoid-chip">✗ Caffè >2/giorno</div>
+    <div class="avoid-chip">✗ Fritti</div>
+    <div class="avoid-chip">✗ Cibi ultra-processati</div>
+    <div class="avoid-chip">✗ Pasta/farina di fave</div>
+  </div>
+
+  <div class="section-title mt16">🏃 Attività fisica consigliata</div>
+  <div class="activity-grid">
+    <div class="activity-card">
+      <span class="activity-icon">🚶</span>
+      <div class="activity-name">Camminata veloce</div>
+      <div class="activity-desc">La regina per l'iperteso. Abbassa la pressione sistolica nel tempo.</div>
+      <span class="activity-freq">5×/sett · 30–45 min</span>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">🚴</span>
+      <div class="activity-name">Bici/Cyclette</div>
+      <div class="activity-desc">Cardio a basso impatto articolare. Perfetto a 54 anni.</div>
+      <span class="activity-freq">3×/sett · 30 min</span>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">🏊</span>
+      <div class="activity-name">Nuoto/Acquagym</div>
+      <div class="activity-desc">Nessun carico articolare, ottimo per il cuore.</div>
+      <span class="activity-freq">2×/sett · 45 min</span>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">🧘</span>
+      <div class="activity-name">Yoga/Stretching</div>
+      <div class="activity-desc">Riduce cortisolo e pressione. Anche 20 min al mattino.</div>
+      <span class="activity-freq">3×/sett · 20 min</span>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">💪</span>
+      <div class="activity-name">Tonificazione</div>
+      <div class="activity-desc">Elastici o pesi leggeri. No trattenimento del respiro!</div>
+      <span class="activity-freq">2×/sett · 25 min</span>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">🪜</span>
+      <div class="activity-name">Gesti quotidiani</div>
+      <div class="activity-desc">Scale, parcheggio lontano, telefonate in piedi.</div>
+      <span class="activity-freq">Ogni giorno · 8.000 passi</span>
+    </div>
+  </div>
+
+  <div style="height:20px;"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav id="app-nav">
+  <button class="nav-tab active" data-page="home" onclick="switchPage('home',this)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Oggi
+  </button>
+  <button class="nav-tab" data-page="fasi" onclick="switchPage('fasi',this)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    Le Fasi
+  </button>
+  <button class="nav-tab" data-page="tips" onclick="switchPage('tips',this)">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    Consigli
+  </button>
+</nav>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+const WEEK = [
+  { day:1, name:"Lunedì", label:"Si parte! 🚀",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~280 kcal", options:[
+        { title:"Avena classica", desc:"50g fiocchi d'avena con latte di avena non zuccherato + cannella o stevia", note:"Caffè o orzo dolcificato a parte" },
+        { title:"Pancake d'avena", desc:"50g farina d'avena + 1 albume + latte vegetale + stevia. Cuoci in padellina", note:"Puoi aggiungere cacao amaro nell'impasto" },
+        { title:"Crêpe di crusca", desc:"1,5 cucchiai crusca d'avena + 1,5 ricotta magra + 1 albume montato + stevia", note:"Preparane 2–3 e conserva in frigo" },
+        { title:"Uovo + avocado", desc:"1 uovo strapazzato + 2 spicchi d'avocado con limone, sale, pepe", note:"Proteico e saziante" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~80 kcal", options:[
+        { title:"Verdure crude", desc:"Sedano, finocchio, cetriolo a bastoncini — a volontà", note:"Tienili pronti in frigo" },
+        { title:"Fesa di tacchino", desc:"30g fesa di tacchino + bastoncini di sedano o cetriolo", note:"" },
+        { title:"Bresaola", desc:"30g bresaola con rucola e gocce di limone", note:"" },
+        { title:"Wasa proteico", desc:"1 Wasa + 30g salmone affumicato", note:"⚠️ Max 2 volte a sett. per il sodio" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~450 kcal", options:[
+        { title:"Frittata di zucchine", desc:"2 uova + 1 albume con zucchine, erbe, olio EVO. Insalata mista: songino, spinacini, ravanelli", note:"Condisci con olio EVO + succo di limone" },
+        { title:"Tonno in insalata", desc:"120g tonno sgocciolato con finocchi, ravanelli, 4–5 olive nere, songino. Olio EVO + aceto di mele", note:"" },
+        { title:"Bresaola gourmet", desc:"100g bresaola con songino, champignon crudi, scaglie parmigiano, olio EVO e limone", note:"Finocchi julienne come extra" },
+        { title:"Polpette tonno al forno", desc:"120g tonno + zucchine grattugiate + 1 albume + 1 cucchiaio parmigiano + prezzemolo. Forno 180° 15 min", note:"Avanzano? Ottime il giorno dopo!" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~420 kcal", options:[
+        { title:"Spigola al cartoccio", desc:"250g spigola con olive nere, limone, basilico, 2–3 pomodorini. Forno 200° per 20 min", note:"Broccoli al vapore come contorno" },
+        { title:"Pollo alla griglia", desc:"200g petto di pollo marinato con limone, timo e aglio. 6–7 min per lato", note:"Zucchine e melanzane grigliate a volontà" },
+        { title:"Salmone alla griglia", desc:"200g salmone, 3–4 min per lato. Limone e aneto", note:"Insalata di sedano, cetrioli, finocchi" },
+        { title:"Merluzzo al forno", desc:"250g merluzzo con pomodorini, capperi, olive, origano. Forno 180° 18 min", note:"Spinacini al vapore con olio EVO" },
+      ]},
+    ],
+    tip:"Primo giorno: se senti fame nel pomeriggio, bevi un bicchiere d'acqua e aspetta 10 minuti. Spesso è sete mascherata!"},
+
+  { day:2, name:"Martedì", label:"Tieni duro 💪",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~260 kcal", options:[
+        { title:"Pancake al cacao", desc:"50g farina d'avena + 1 albume + latte vegetale + cacao amaro + stevia", note:"Cuoci su padella piccola antiaderente" },
+        { title:"Wasa con salmone", desc:"2 Wasa + 50g salmone affumicato + velo di Philadelphia light", note:"Aggiungi capperi o aneto se graditi" },
+        { title:"Crêpe di crusca", desc:"1,5 cucchiai crusca d'avena + 1,5 ricotta magra + 1 albume + stevia", note:"" },
+        { title:"Yogurt greco + avena", desc:"125g yogurt greco alla vaniglia + 1 cucchiaio fiocchi d'avena + decina di mirtilli", note:"I mirtilli hanno pochissimi carbo" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~60 kcal", options:[
+        { title:"Verdure crude", desc:"Finocchio, sedano, carote (max 200g) a bastoncini", note:"" },
+        { title:"Fesa + verdure", desc:"30g fesa di tacchino + cetriolo e sedano", note:"" },
+        { title:"Bresaola + rucola", desc:"30g bresaola con foglie di rucola e limone", note:"" },
+        { title:"Wasa + prosciutto", desc:"1 Wasa + 30g prosciutto crudo magro a basso sodio", note:"" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~380 kcal", options:[
+        { title:"Bresaola gourmet", desc:"100g bresaola con songino, champignon, scaglie di parmigiano. Olio EVO + limone + pepe", note:"" },
+        { title:"Tacchino con finocchi", desc:"200g petto tacchino grigliato + vellutata di finocchi (bolliti e frullati + 1 cucchiaio parmigiano)", note:"" },
+        { title:"Frittata di spinaci", desc:"2 uova + spinaci + aglio + olio EVO. Insalata mista di contorno", note:"" },
+        { title:"Tonno e finocchi", desc:"120g tonno sgocciolato + finocchi julienne + 4–5 olive nere + olio EVO", note:"" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~430 kcal", options:[
+        { title:"Pollo con verdure grigliate", desc:"200g petto di pollo marinato al limone. Zucchine e melanzane sbucciate grigliate", note:"" },
+        { title:"Zuppa di lenticchie", desc:"150g lenticchie rosse con sedano, carota, pomodoro. Olio EVO a crudo", note:"✅ Lenticchie ok — non sono fave!" },
+        { title:"Scamorza grigliata", desc:"150g scamorza grigliata con radicchio grigliato e prosciutto crudo magro", note:"" },
+        { title:"Seppie in padella", desc:"200g seppie con pomodorini, capperi, prezzemolo. 15 min a fuoco medio", note:"Insalata verde come contorno" },
+      ]},
+    ],
+    tip:"Giorno 2: potresti sentirti un po' stanco — è normalissimo. Bevi molta acqua, passa in poche ore!"},
+
+  { day:3, name:"Mercoledì", label:"Metà settimana! 🌟",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~240 kcal", options:[
+        { title:"Uovo + avocado", desc:"1 uovo strapazzato o all'occhio + 2 spicchi d'avocado con sale, limone, pepe", note:"Ricco e saziante per le mattine impegnate" },
+        { title:"Avena classica", desc:"50g fiocchi d'avena con latte di avena + cannella + stevia", note:"" },
+        { title:"Pancake proteico", desc:"50g farina d'avena + 1 albume + latte vegetale + stevia", note:"" },
+        { title:"Wasa + crudo", desc:"2 Wasa di segale + 40g prosciutto crudo magro a basso sodio", note:"" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~50 kcal", options:[
+        { title:"Verdure + fesa", desc:"Sedano e cetriolo a bastoncini + 30g fesa di tacchino", note:"" },
+        { title:"Solo verdure", desc:"Finocchio, ravanelli, cetriolo a volontà", note:"" },
+        { title:"Bresaola mini", desc:"30g bresaola con rucola e limone", note:"" },
+        { title:"Wasa + salmone", desc:"1 Wasa + 30g salmone affumicato", note:"" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~400 kcal", options:[
+        { title:"Tonno in insalata", desc:"120g tonno sgocciolato con finocchi, ravanelli, 4–5 olive, songino. Olio EVO + aceto di mele", note:"" },
+        { title:"Hamburger di tacchino", desc:"200g macinato tacchino con erbe, aglio, sale. Padella o forno. Zucchine trifolate", note:"Saporito quanto un burger!" },
+        { title:"Frittata di funghi", desc:"2 uova + champignon a piacere + erba cipollina. Olio EVO", note:"" },
+        { title:"Tacchino + fagiolini", desc:"200g petto tacchino grigliato + 200g fagiolini bolliti con olio e limone", note:"" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~440 kcal", options:[
+        { title:"Polpette tonno al forno", desc:"120g tonno + zucchine grattugiate + 1 albume + 1 cucchiaio parmigiano. Forno 180° 15 min", note:"Cicoria o bieta con limone come contorno" },
+        { title:"Spigola al cartoccio", desc:"250g spigola con olive, limone, basilico, pomodorini. Forno 200° 20 min", note:"" },
+        { title:"Orata al forno", desc:"250g orata con aglio, rosmarino, olio EVO. Forno 200° 22 min", note:"Broccoli al vapore di contorno" },
+        { title:"Straccetti di manzo", desc:"180g manzo in padella con aglio, rosmarino e goccio di vino bianco", note:"Spinacini al vapore" },
+      ]},
+    ],
+    tip:"Dal giorno 3 il corpo inizia ad adattarsi! Prepara in anticipo le polpette di tonno — avanzano? Ottime anche domani."},
+
+  { day:4, name:"Giovedì", label:"Oltre metà! 🎯",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~270 kcal", options:[
+        { title:"Crêpe di crusca", desc:"1,5 cucchiai crusca d'avena + 1,5 ricotta magra + 1 albume montato + stevia. Velo di burro d'arachidi", note:"Preparane 2–3 insieme e conserva" },
+        { title:"Avena al cacao", desc:"50g fiocchi d'avena + latte di avena + 1 cucchiaino cacao amaro + stevia", note:"" },
+        { title:"Pancake proteico", desc:"50g farina d'avena + 1 albume + latte vegetale + cacao + stevia", note:"" },
+        { title:"Yogurt greco", desc:"125g yogurt greco alla vaniglia + 1 cucchiaio fiocchi d'avena al cacao", note:"" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~70 kcal", options:[
+        { title:"Verdure + fesa", desc:"Cetriolo, sedano, finocchio + 30g fesa di tacchino", note:"" },
+        { title:"Solo verdure", desc:"Mix di verdure crude: finocchio, ravanelli, cetriolo a volontà", note:"" },
+        { title:"Bresaola mini", desc:"30g bresaola + foglie di rucola", note:"" },
+        { title:"Wasa + prosciutto", desc:"1 Wasa + 30g prosciutto crudo magro a basso sodio", note:"" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~420 kcal", options:[
+        { title:"Tacchino + vellutata", desc:"200g petto tacchino grigliato + vellutata di finocchi (bolliti+frullati + 1 cucchiaio parmigiano)", note:"Fagiolini bolliti (200g) come contorno" },
+        { title:"Frittata di zucchine", desc:"2 uova + 1 albume con zucchine, sale, pepe, erbe. Padella antiaderente", note:"" },
+        { title:"Salmone affumicato", desc:"120g salmone affumicato con insalata di sedano, cetrioli, finocchi julienne", note:"⚠️ Max 2 volte a settimana" },
+        { title:"Tonno e cavolfiore", desc:"120g tonno sgocciolato + cavolfiore al vapore con olio EVO e limone", note:"" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~400 kcal", options:[
+        { title:"Straccetti di manzo", desc:"180g manzo a striscioline con aglio, rosmarino, goccio di vino bianco", note:"Spinacini al vapore con olio EVO" },
+        { title:"Pollo arrosto", desc:"250g pollo (senza pelle) con cipolle dolci al forno e rosmarino", note:"Broccoli o cavolfiore al forno" },
+        { title:"Merluzzo al forno", desc:"250g merluzzo con pomodorini, capperi, origano. Forno 180° 18 min", note:"Insalata mista di contorno" },
+        { title:"Seppie con piselli", desc:"200g seppie + 100g piselli in padella con olio EVO, aglio e prezzemolo", note:"" },
+      ]},
+    ],
+    tip:"Giovedì: giorno perfetto per una camminata di 30 minuti — accelera i risultati e abbassa la pressione!"},
+
+  { day:5, name:"Venerdì", label:"Quasi al traguardo 🏁",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~260 kcal", options:[
+        { title:"Wasa con salmone", desc:"2 Wasa + 50g salmone affumicato + velo di Philadelphia light + capperi", note:"" },
+        { title:"Uovo + avocado", desc:"1 uovo + 2 spicchi avocado con sale, limone, pepe", note:"" },
+        { title:"Pancake d'avena", desc:"50g farina d'avena + 1 albume + latte vegetale + stevia", note:"" },
+        { title:"Crêpe di crusca", desc:"1,5 cucchiai crusca + 1,5 ricotta magra + 1 albume + stevia", note:"" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~60 kcal", options:[
+        { title:"Verdure crude", desc:"Sedano, ravanelli, cetriolo a bastoncini a volontà", note:"" },
+        { title:"Fesa + verdure", desc:"30g fesa di tacchino + bastoncini di finocchio", note:"" },
+        { title:"Bresaola", desc:"30g bresaola con rucola e limone", note:"" },
+        { title:"Wasa + crudo", desc:"1 Wasa + 25g prosciutto crudo magro", note:"" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~410 kcal", options:[
+        { title:"Hamburger di tacchino", desc:"200g macinato tacchino con erbe, aglio, sale. Padella o forno. Zucchine trifolate + songino", note:"" },
+        { title:"Tonno in insalata", desc:"120g tonno sgocciolato + finocchi + olive nere + songino. Olio EVO + aceto", note:"" },
+        { title:"Pollo alla griglia", desc:"200g petto di pollo marinato al limone e timo. Fagiolini bolliti come contorno", note:"" },
+        { title:"Frittata di asparagi", desc:"2 uova + asparagi tagliati + olio EVO + parmigiano. Forno o padella", note:"" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~430 kcal", options:[
+        { title:"Salmone alla griglia", desc:"200g salmone, 3–4 min per lato. Limone e aneto. Insalata di finocchi, sedano, cetrioli", note:"" },
+        { title:"Spigola al forno", desc:"250g spigola con aglio, olio EVO, rosmarino. Forno 200° 20 min. Broccoli al vapore", note:"" },
+        { title:"Pollo alla griglia", desc:"200g petto di pollo con zucchine e melanzane grigliate", note:"" },
+        { title:"Polpo bollito", desc:"200g polpo bollito con sedano, 4–5 olive, olio EVO, limone e prezzemolo", note:"" },
+      ]},
+    ],
+    tip:"Venerdì! Il weekend è il banco di prova. Hai il menù — usalo. Puoi farcela!"},
+
+  { day:6, name:"Sabato", label:"Primo weekend 💪",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~290 kcal", options:[
+        { title:"Yogurt greco + avena", desc:"125g yogurt greco alla vaniglia + 1 cucchiaio fiocchi d'avena al cacao + decina di mirtilli", note:"La colazione più ricca — te la sei guadagnata!" },
+        { title:"Pancake del sabato", desc:"50g farina d'avena + 1 albume + cacao amaro + stevia. Fai 2–3 piccoli", note:"Cappuccino con latte di avena" },
+        { title:"Avena con frutti di bosco", desc:"50g fiocchi d'avena + latte di avena + mirtilli o lamponi + stevia", note:"" },
+        { title:"Crêpe farcita", desc:"Crêpe di crusca d'avena con velo di burro d'arachidi senza zuccheri aggiunti", note:"" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~80 kcal", options:[
+        { title:"Verdure crude", desc:"Mix di cetriolo, sedano, finocchio a bastoncini a volontà", note:"" },
+        { title:"Bresaola + verdure", desc:"30g bresaola + bastoncini di sedano e cetriolo", note:"" },
+        { title:"Fesa + finocchio", desc:"30g fesa di tacchino + finocchio julienne", note:"" },
+        { title:"Wasa + salmone", desc:"1 Wasa + 30g salmone affumicato", note:"" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~390 kcal", options:[
+        { title:"Frittatina di albumi", desc:"4 albumi + 1 uovo con zucchine, fagiolini e 1 carota al vapore. Insalata verde abbondante", note:"" },
+        { title:"Pollo con funghi", desc:"200g petto di pollo in padella con champignon, aglio, rosmarino e olio EVO", note:"" },
+        { title:"Verdure ripiene di tonno", desc:"Melanzane e zucchine al forno ripiene di tonno (120g) + 1 albume + 1 cucchiaio parmigiano", note:"" },
+        { title:"Bresaola gourmet", desc:"100g bresaola con rucola, scaglie parmigiano, olio EVO e limone", note:"" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~450 kcal", options:[
+        { title:"Pollo arrosto", desc:"250g pollo arrosto (senza pelle) con cipolle dolci al forno e rosmarino", note:"Broccoli o cavolfiore al forno" },
+        { title:"Spigola al cartoccio", desc:"250g spigola con olive nere, limone, basilico, pomodorini. Forno 200° 20 min", note:"" },
+        { title:"Tagliata di manzo", desc:"180g manzo alla griglia con rucola, scaglie di parmigiano e olio EVO", note:"Max 1–2 volte a sett. la carne rossa" },
+        { title:"Salmone al forno", desc:"200g salmone con crosta di erbe (prezzemolo, aglio, olio). Forno 200° 15 min", note:"" },
+      ]},
+    ],
+    tip:"Se esci a cena: ordina secondi alla griglia o pesce al forno. Evita pane e dolci. Domani ti sveglierai soddisfatto!"},
+
+  { day:7, name:"Domenica", label:"Fine Settimana 1 🎉",
+    meals:[
+      { id:"col", type:"Colazione", emoji:"🌅", kcal:"~280 kcal", options:[
+        { title:"Pancake domenicale", desc:"50g farina d'avena + 1 albume + cacao amaro + stevia. 2–3 pancake piccoli", note:"Cappuccino con latte di avena — te lo meriti!" },
+        { title:"Avena + frutti di bosco", desc:"50g fiocchi d'avena + latte di avena + mirtilli/lamponi", note:"" },
+        { title:"Uovo + avocado", desc:"1 uovo + 2 spicchi d'avocado + caffè", note:"" },
+        { title:"Yogurt greco + avena", desc:"125g yogurt greco + 1 cucchiaio fiocchi d'avena + mirtilli", note:"" },
+      ]},
+      { id:"spu", type:"Spuntino", emoji:"🍎", kcal:"~60 kcal", options:[
+        { title:"Verdure crude", desc:"Mix di verdure crude a piacere", note:"" },
+        { title:"Tisana + verdure", desc:"Tisana a tuo gusto + cetriolo e finocchio", note:"" },
+        { title:"Fesa + verdure", desc:"30g fesa di tacchino + bastoncini di verdure", note:"" },
+        { title:"Bresaola", desc:"30g bresaola con foglie di insalata", note:"" },
+      ]},
+      { id:"pra", type:"Pranzo", emoji:"☀️", kcal:"~460 kcal", options:[
+        { title:"🌟 Pasta legumi + tonno", desc:"100g pasta di farina di legumi (non di fave!) con tonno, zucchine, buccia di limone e menta", note:"Mezzo strappo previsto! Goditelo senza sensi di colpa" },
+        { title:"Tacchino con ratatouille", desc:"200g petto tacchino grigliato + ratatouille di zucchine, melanzane al forno", note:"" },
+        { title:"Frittata domenicale", desc:"3 uova con spinaci, pomodorini e basilico. Forno o padella", note:"" },
+        { title:"Spiedini misti", desc:"Spiedini di pollo e verdure (zucchine, peperoni, cipolla) alla griglia", note:"" },
+      ]},
+      { id:"cen", type:"Cena", emoji:"🌙", kcal:"~430 kcal", options:[
+        { title:"Filetto di manzo 🥩", desc:"180g filetto alla griglia, 2–3 min per lato. Ratatouille di zucchine, melanzane e 1 carota piccola", note:"Fine settimana con stile!" },
+        { title:"Orata al forno", desc:"250g orata con aglio, olio EVO, rosmarino. Forno 200° 22 min. Insalata mista", note:"" },
+        { title:"Pollo al forno", desc:"250g pollo con verdure miste al forno (zucchine, melanzane, cipolle)", note:"" },
+        { title:"Salmone con verdure", desc:"200g salmone al forno con asparagi o broccoli al vapore", note:"" },
+      ]},
+    ],
+    tip:"🎉 Hai completato la settimana 1! Pesati domani mattina a digiuno. La settimana 2 arriverà dal tuo nutrizionista AI!"},
+];
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+const SK = "dieta-pwa-v2";
+function loadState() { try { return JSON.parse(localStorage.getItem(SK)||'{}'); } catch { return {}; } }
+function saveState(s) { try { localStorage.setItem(SK,JSON.stringify(s)); } catch {} }
+
+let state = loadState();
+if (!state.checked) state.checked = {};
+if (!state.opts)    state.opts    = {};
+
+function getChecked(d,m){ return !!(state.checked[d]||{})[m]; }
+function getOpt(d,m)    { return (state.opts[d]||{})[m]||0; }
+
+function setChecked(d,m,v){
+  if(!state.checked[d]) state.checked[d]={};
+  state.checked[d][m]=v;
+  saveState(state);
+}
+function setOpt(d,m,v){
+  if(!state.opts[d]) state.opts[d]={};
+  state.opts[d][m]=v;
+  saveState(state);
+}
+
+// ─── NAVIGATION ────────────────────────────────────────────────────────────
+function switchPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ─── RULES TOGGLE ──────────────────────────────────────────────────────────
+function toggleRules(btn) {
+  const body = document.getElementById('rules-body');
+  body.classList.toggle('open');
+  btn.querySelector('svg').style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+// ─── PHASE CARDS ───────────────────────────────────────────────────────────
+function togglePhaseCard(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ─── PROGRESS ──────────────────────────────────────────────────────────────
+function updateProgress() {
+  const total = WEEK.reduce((a,d)=>a+d.meals.length,0);
+  const done  = WEEK.reduce((a,d,i)=>{
+    return a + d.meals.filter(m=>getChecked(i,m.id)).length;
+  },0);
+  const pct = Math.round(done/total*100);
+  document.getElementById('progress-text').textContent = done+' / '+total;
+  document.getElementById('progress-fill').style.width = pct+'%';
+}
+
+// ─── TODAY QUICK GRID ───────────────────────────────────────────────────────
+function renderTodayGrid() {
+  const d = WEEK[0];
+  const grid = document.getElementById('today-grid');
+  grid.innerHTML = d.meals.map(m=>{
+    const checked = getChecked(0,m.id);
+    const opt = d.meals.find(x=>x.id===m.id);
+    const optData = opt.options[getOpt(0,m.id)%opt.options.length];
+    return `<div class="today-meal-mini ${checked?'done':''}" onclick="quickCheck(0,'${m.id}',this)">
+      <div class="tmm-type">${m.emoji} ${m.type}</div>
+      <div class="tmm-title">${optData.title}</div>
+      <div class="tmm-check">${checked?'✅':''}</div>
+    </div>`;
+  }).join('');
+}
+
+function quickCheck(dayIdx, mealId, el) {
+  const cur = getChecked(dayIdx, mealId);
+  setChecked(dayIdx, mealId, !cur);
+  el.classList.toggle('done', !cur);
+  el.querySelector('.tmm-check').textContent = !cur ? '✅' : '';
+  updateProgress();
+  updateDayCard(dayIdx);
+}
+
+// ─── DAY CARDS ─────────────────────────────────────────────────────────────
+function renderDays() {
+  const list = document.getElementById('days-list');
+  list.innerHTML = '';
+  WEEK.forEach((d,i)=>{
+    const card = buildDayCard(d,i);
+    list.appendChild(card);
+  });
+}
+
+function buildDayCard(d, i) {
+  const isToday = i===0;
+  const doneCount = d.meals.filter(m=>getChecked(i,m.id)).length;
+  const allDone = doneCount === d.meals.length;
+  const isOpen = isToday;
+
+  const div = document.createElement('div');
+  div.className = `day-card${isToday?' today-highlight':''}${allDone?' all-done':''}${isOpen?' open':''}`;
+  div.id = `daycard-${i}`;
+
+  const dotHtml = d.meals.map(m=>`<div class="meal-dot-sm${getChecked(i,m.id)?' checked':''}"></div>`).join('');
+
+  const dayNumContent = allDone && !isToday ? '✓' : d.day;
+
+  div.innerHTML = `
+    <div class="day-header" onclick="toggleDay(${i})">
+      <div class="day-num">${dayNumContent}</div>
+      <div class="day-info">
+        <div class="day-name">${d.name}
+          ${isToday?'<span class="badge-today">OGGI</span>':''}
+          ${allDone?'<span class="badge-done">✓ Completato</span>':''}
+        </div>
+        <div class="day-sub">Giorno ${d.day} di 14 · ${d.label}</div>
+      </div>
+      <div class="day-dots">${dotHtml}</div>
+      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="day-body">
+      <div class="meals-list">${d.meals.map(m=>buildMealCard(m,i)).join('')}</div>
+      <div class="day-tip"><span style="font-size:16px;flex-shrink:0">💡</span><span>${d.tip}</span></div>
+      <div class="water-remind"><span>💧</span><span>Obiettivo acqua: <strong style="color:var(--green)">8 bicchieri = 2 litri</strong></span></div>
+    </div>`;
+  return div;
+}
+
+function buildMealCard(m, dayIdx) {
+  const checked = getChecked(dayIdx, m.id);
+  const optIdx  = getOpt(dayIdx, m.id);
+  const opt     = m.options[optIdx % m.options.length];
+  const total   = m.options.length;
+  const curIdx  = optIdx % total;
+
+  const dots = m.options.map((_,i)=>`<div class="opt-dot${i===curIdx?' active':''}" style="width:${i===curIdx?'16px':'6px'}"></div>`).join('');
+
+  return `<div class="meal-card${checked?' done':''}" id="meal-${dayIdx}-${m.id}">
+    <div class="meal-head">
+      <span class="meal-emoji">${m.emoji}</span>
+      <span class="meal-type-label">${m.type}</span>
+      <span class="meal-kcal">${m.kcal}</span>
+    </div>
+    <div class="meal-body-inner">
+      <div class="opt-dots">${dots}<span class="opt-count">${curIdx+1}/${total}</span></div>
+      <div class="meal-opt-title">${opt.title}</div>
+      <div class="meal-opt-desc">${opt.desc}</div>
+      ${opt.note?`<div class="meal-opt-note">${opt.note}</div>`:''}
+      <div class="meal-actions">
+        <button class="btn-swap" onclick="swapMeal(${dayIdx},'${m.id}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Cambia
+        </button>
+        <button class="btn-check${checked?' checked':''}" onclick="checkMeal(${dayIdx},'${m.id}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          ${checked?'✓ Fatto!':'Segna fatto'}
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleDay(i) {
+  const card = document.getElementById(`daycard-${i}`);
+  card.classList.toggle('open');
+}
+
+function swapMeal(dayIdx, mealId) {
+  const cur = getOpt(dayIdx, mealId);
+  setOpt(dayIdx, mealId, cur+1);
+  refreshMeal(dayIdx, mealId);
+  renderTodayGrid();
+}
+
+function checkMeal(dayIdx, mealId) {
+  const cur = getChecked(dayIdx, mealId);
+  setChecked(dayIdx, mealId, !cur);
+  refreshMeal(dayIdx, mealId);
+  updateDayCard(dayIdx);
+  renderTodayGrid();
+  updateProgress();
+}
+
+function refreshMeal(dayIdx, mealId) {
+  const mealData = WEEK[dayIdx].meals.find(m=>m.id===mealId);
+  const el = document.getElementById(`meal-${dayIdx}-${mealId}`);
+  if(el && mealData) el.outerHTML = buildMealCard(mealData, dayIdx);
+}
+
+function updateDayCard(dayIdx) {
+  const d = WEEK[dayIdx];
+  const doneCount = d.meals.filter(m=>getChecked(dayIdx,m.id)).length;
+  const allDone = doneCount === d.meals.length;
+  const card = document.getElementById(`daycard-${dayIdx}`);
+  if(!card) return;
+  card.classList.toggle('all-done', allDone);
+  // update dots
+  const dots = card.querySelectorAll('.meal-dot-sm');
+  d.meals.forEach((m,i)=>{ if(dots[i]) dots[i].classList.toggle('checked', getChecked(dayIdx,m.id)); });
+  // update day-num
+  const numEl = card.querySelector('.day-num');
+  if(numEl && dayIdx!==0) numEl.textContent = allDone ? '✓' : d.day;
+  // badge
+  const name = card.querySelector('.day-name');
+  const existing = name.querySelector('.badge-done');
+  if(allDone && !existing) name.insertAdjacentHTML('beforeend','<span class="badge-done">✓ Completato</span>');
+  if(!allDone && existing) existing.remove();
+}
+
+// ─── PWA INSTALL ───────────────────────────────────────────────────────────
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-banner').style.display = 'block';
+});
+document.getElementById('install-btn').addEventListener('click', async()=>{
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    const {outcome} = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    document.getElementById('install-banner').style.display = 'none';
+  }
+});
+document.getElementById('install-close').addEventListener('click',()=>{
+  document.getElementById('install-banner').style.display='none';
+});
+window.addEventListener('appinstalled',()=>{
+  document.getElementById('install-banner').style.display='none';
+});
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+renderDays();
+renderTodayGrid();
+updateProgress();
+
+// Register SW
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
